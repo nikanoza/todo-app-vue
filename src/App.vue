@@ -1,21 +1,25 @@
 <template>
   <div class="main">
     <the-header></the-header>
+    <add-new-task></add-new-task>
   </div>
 </template>
 
 <script>
 import TheHeader from "./components/leyout/TheHeader.vue";
+import AddNewTask from "./components/AddNewTask.vue";
 
 export default {
   name: "App",
   components: {
     TheHeader,
+    AddNewTask,
   },
 };
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 * {
   margin: 0;
   padding: 0;
