@@ -1,5 +1,5 @@
 <template>
-  <li class="main">
+  <li class="task-item">
     <span
       class="checkbox"
       @click="changeStatus"
@@ -25,6 +25,7 @@
       width="18"
       height="18"
       class="delete"
+      @click="removeTask"
     >
       <path
         fill="#494C6B"
@@ -33,11 +34,13 @@
       />
     </svg>
   </li>
+  <div class="hr" :class="{ dark: darkMode }" v-if="hrStatus"></div>
 </template>
 
 <script>
 export default {
-  props: ["id", "text", "active"],
+  props: ["id", "text", "active", "index"],
+  emits: ["change-status", "remove-task"],
   computed: {
     darkMode() {
       return this.$store.getters["darkMode"];
@@ -55,12 +58,24 @@ export default {
         textDecoration: !this.active ? "line-through" : "none",
       };
     },
+    hrStatus() {
+      const tasks = this.$store.getters["tasks"];
+      return tasks.length > 0 && this.index < tasks.length - 1;
+    },
+  },
+  methods: {
+    changeStatus() {
+      this.$emit("change-status", this.id);
+    },
+    removeTask() {
+      this.$emit("remove-task", this.id);
+    },
   },
 };
 </script>
 
 <style scoped>
-.main {
+.task-item {
   width: 100%;
   height: 52px;
   display: flex;
@@ -95,13 +110,22 @@ export default {
   text-overflow: ellipsis;
 }
 
-.delete{
+.delete {
   margin-left: auto;
   cursor: pointer;
 }
 
+.hr {
+  height: 1px;
+  background-color: #e3e4f1;
+}
+
+.hr.dark {
+  background-color: #393a4b;
+}
+
 @media (min-width: 768px) {
-  .main {
+  .task-item {
     height: 64px;
   }
   .text {

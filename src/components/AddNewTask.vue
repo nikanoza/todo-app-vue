@@ -60,6 +60,8 @@ export default {
         };
 
         this.$emit("save-task", newTask);
+        this.text = "";
+        this.active = true;
       }
     },
   },
