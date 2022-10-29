@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <the-header></the-header>
-    <add-new-task></add-new-task>
+    <add-new-task @save-task="addTask"></add-new-task>
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   components: {
     TheHeader,
     AddNewTask,
+  },
+  methods: {
+    addTask(data) {
+      this.$store.dispatch("addNewTask", data);
+    },
   },
 };
 </script>
