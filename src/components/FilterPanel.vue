@@ -1,8 +1,20 @@
 <template>
   <div class="panel" :class="{ dark: darkMode }">
-    <button :style="colorAll" @click="changeFilter('All')">All</button>
-    <button :style="colorActive" @click="changeFilter('active')">Active</button>
-    <button :style="colorCompleted" @click="changeFilter('completed')">
+    <button :id="allBtnId" :style="colorAll" @click="changeFilter('All')">
+      All
+    </button>
+    <button
+      :id="activeBtnId"
+      :style="colorActive"
+      @click="changeFilter('active')"
+    >
+      Active
+    </button>
+    <button
+      :id="completedBtnId"
+      :style="colorCompleted"
+      @click="changeFilter('completed')"
+    >
       Completed
     </button>
   </div>
@@ -12,6 +24,20 @@
 import { computed } from "@vue/runtime-core";
 import { useStore } from "vuex";
 export default {
+  props: {
+    "allBtnId": {
+      type: String,
+      default: "",
+    },
+    "activeBtnId": {
+      type: String,
+      default: "",
+    },
+    "completedBtnId": {
+      type: String,
+      default: "",
+    },
+  },
   emits: ["change-filter"],
   setup(props, { emit }) {
     const store = useStore();

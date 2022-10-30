@@ -1,6 +1,7 @@
 <template>
   <li class="task-item">
     <span
+      :id="'checkbox' + id"
       class="checkbox"
       :class="{ dark: darkMode, active: !active }"
       @click="changeStatus"
@@ -21,6 +22,7 @@
     </span>
     <p :style="color" class="text">{{ text }}</p>
     <svg
+      :id="'delete-btn-' + id"
       xmlns="http://www.w3.org/2000/svg"
       width="18"
       height="18"

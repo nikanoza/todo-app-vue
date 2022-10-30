@@ -1,6 +1,7 @@
 <template>
   <div class="card" :class="{ dark: darkMode }">
     <span
+      id="new-task-status"
       class="checkbox"
       :class="{ dark: darkMode, active: !status }"
       @click="changeStatus"
@@ -20,6 +21,7 @@
       </svg>
     </span>
     <input
+      id="task-input"
       v-model.trim="text"
       type="text"
       placeholder="Create a new todo…"

@@ -16,9 +16,15 @@
       <div class="controls">
         <span>{{ tasks.length }} items left</span>
         <div class="buttonsDesktop">
-          <filter-panel @change-filter="changeFilter"></filter-panel>
+          <filter-panel
+            :all-btn-id="'all-btn-desktop'"
+            :active-btn-id="'active-btn-desktop'"
+            :completed-btn-id="'completed-btn-desktop'"
+            @change-filter="changeFilter"
+          ></filter-panel>
         </div>
         <button
+          id="clear"
           class="clear"
           :class="{ dark: darkMode }"
           @click="clearCompleted"
@@ -28,7 +34,12 @@
       </div>
     </ul>
     <div class="buttonsMobile">
-      <filter-panel @change-filter="changeFilter"></filter-panel>
+      <filter-panel
+        :all-btn-id="'all-btn-mobile'"
+        :active-btn-id="'active-btn-mobile'"
+        :completed-btn-id="'completed-btn-mobile'"
+        @change-filter="changeFilter"
+      ></filter-panel>
     </div>
   </div>
 </template>
