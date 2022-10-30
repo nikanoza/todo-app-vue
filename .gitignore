@@ -1,7 +1,13 @@
 .DS_Store
 node_modules
 /dist
+.vscode
 
+#testing
+/coverage
+/.nyc_output
+cypress/vidoes
+cypress/screenshots
 
 # local env files
 .env.local
