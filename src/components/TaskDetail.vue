@@ -60,7 +60,7 @@ export default {
     },
     hrStatus() {
       const tasks = this.$store.getters["tasks"];
-      return tasks.length > 0 && this.index < tasks.length - 1;
+      return tasks.length > 0 ;
     },
   },
   methods: {

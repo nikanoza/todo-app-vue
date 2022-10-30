@@ -5,14 +5,24 @@ const store = createStore({
     return {
       tasks: [],
       darkMode: false,
+      filter: "All",
     };
   },
   getters: {
     tasks(state) {
-      return state.tasks;
+      const actives = state.tasks.filter((task) => task.active);
+      const completed = state.tasks.filter((task) => !task.active);
+      return state.filter === "active"
+        ? actives
+        : state.filter === "completed"
+        ? completed
+        : state.tasks;
     },
     darkMode(state) {
       return state.darkMode;
+    },
+    filterBy(state) {
+      return state.filter;
     },
   },
   mutations: {
@@ -34,6 +44,13 @@ const store = createStore({
       tasksClone.splice(taskIndex, 1);
       state.tasks = tasksClone;
     },
+    clearCompleted(state) {
+      const clearTasks = state.tasks.filter((task) => task.active);
+      state.tasks = clearTasks;
+    },
+    changeFilter(state, payload) {
+      state.filter = payload;
+    },
   },
   actions: {
     changeMode(context) {
@@ -47,6 +64,12 @@ const store = createStore({
     },
     deleteTask(context, id) {
       context.commit("deleteTask", id);
+    },
+    clearCompleted(context) {
+      context.commit("clearCompleted");
+    },
+    changeFilter(context, filterBy) {
+      context.commit("changeFilter", filterBy);
     },
   },
 });

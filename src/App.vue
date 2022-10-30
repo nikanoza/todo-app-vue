@@ -13,14 +13,31 @@
         @change-status="changeStatus"
         @remove-task="removeTask"
       ></task-detail>
+      <div class="controls">
+        <span>{{ tasks.length }} items left</span>
+        <div class="buttonsDesktop">
+          <filter-panel @change-filter="changeFilter"></filter-panel>
+        </div>
+        <button
+          class="clear"
+          :class="{ dark: darkMode }"
+          @click="clearCompleted"
+        >
+          Clear Completed
+        </button>
+      </div>
     </ul>
+    <div class="buttonsMobile">
+      <filter-panel @change-filter="changeFilter"></filter-panel>
+    </div>
   </div>
 </template>
 
 <script>
-import TheHeader from "./components/leyout/TheHeader.vue";
+import TheHeader from "./components/layout/TheHeader.vue";
 import AddNewTask from "./components/AddNewTask.vue";
 import TaskDetail from "./components/TaskDetail.vue";
+import FilterPanel from "./components/FilterPanel.vue";
 
 export default {
   name: "App",
@@ -28,6 +45,7 @@ export default {
     TheHeader,
     AddNewTask,
     TaskDetail,
+    FilterPanel,
   },
   computed: {
     tasks() {
@@ -46,6 +64,12 @@ export default {
     },
     removeTask(id) {
       this.$store.dispatch("deleteTask", id);
+    },
+    clearCompleted() {
+      this.$store.dispatch("clearCompleted");
+    },
+    changeFilter(filterBy) {
+      this.$store.dispatch("changeFilter", filterBy);
     },
   },
 };
@@ -93,6 +117,36 @@ export default {
   background-image: url(./assets/bg-mobile-dark.jpg);
 }
 
+.controls {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 20px 20px;
+  color: #9495a5;
+}
+
+.controls.dark {
+  color: #5b5e7e;
+}
+
+.buttonsDesktop {
+  display: none;
+}
+
+.clear {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #9495a5;
+  background-color: transparent;
+}
+
+.clear.dark {
+  color: #5b5e7e;
+}
+
 @media (min-width: 768px) {
   .main {
     display: flex;
@@ -108,6 +162,15 @@ export default {
   }
   .main.dark {
     background-image: url(./assets/bg-desktop-dark.jpg);
+  }
+  .controls {
+    height: 64px;
+  }
+  .buttonsDesktop {
+    display: block;
+  }
+  .buttonsMobile {
+    display: none;
   }
 }
 </style>
