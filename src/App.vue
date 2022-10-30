@@ -6,9 +6,9 @@
       <task-detail
         v-for="(task, index) in tasks"
         :id="task.id"
+        :key="task.id"
         :text="task.text"
         :active="task.active"
-        :key="task.id"
         :index="index"
         @change-status="changeStatus"
         @remove-task="removeTask"

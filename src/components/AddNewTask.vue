@@ -2,8 +2,8 @@
   <div class="card" :class="{ dark: darkMode }">
     <span
       class="checkbox"
-      @click="changeStatus"
       :class="{ dark: darkMode, active: !status }"
+      @click="changeStatus"
     >
       <svg
         v-if="!status"
@@ -20,11 +20,11 @@
       </svg>
     </span>
     <input
+      v-model.trim="text"
       type="text"
       placeholder="Create a new todo…"
-      v-model.trim="text"
-      @keydown.enter="addTask"
       :class="{ dark: darkMode }"
+      @keydown.enter="addTask"
     />
   </div>
 </template>

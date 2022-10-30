@@ -2,7 +2,9 @@
   <div class="panel" :class="{ dark: darkMode }">
     <button :style="colorAll" @click="changeFilter('All')">All</button>
     <button :style="colorActive" @click="changeFilter('active')">Active</button>
-    <button :style="colorCompleted" @click="changeFilter('completed')">Completed</button>
+    <button :style="colorCompleted" @click="changeFilter('completed')">
+      Completed
+    </button>
   </div>
 </template>
 
@@ -10,6 +12,7 @@
 import { computed } from "@vue/runtime-core";
 import { useStore } from "vuex";
 export default {
+  emits: ["change-filter"],
   setup(props, { emit }) {
     const store = useStore();
     const darkMode = computed(() => store.state.darkMode);

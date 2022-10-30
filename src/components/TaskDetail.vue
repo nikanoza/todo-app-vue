@@ -2,8 +2,8 @@
   <li class="task-item">
     <span
       class="checkbox"
-      @click="changeStatus"
       :class="{ dark: darkMode, active: !active }"
+      @click="changeStatus"
     >
       <svg
         v-if="!active"
@@ -34,12 +34,29 @@
       />
     </svg>
   </li>
-  <div class="hr" :class="{ dark: darkMode }" v-if="hrStatus"></div>
+  <div v-if="hrStatus" class="hr" :class="{ dark: darkMode }"></div>
 </template>
 
 <script>
 export default {
-  props: ["id", "text", "active", "index"],
+  props: {
+    id: {
+      type: Number,
+      default: 1,
+    },
+    text: {
+      type: String,
+      default: "",
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
+    index: {
+      type: Number,
+      default: 1,
+    },
+  },
   emits: ["change-status", "remove-task"],
   computed: {
     darkMode() {
@@ -60,7 +77,7 @@ export default {
     },
     hrStatus() {
       const tasks = this.$store.getters["tasks"];
-      return tasks.length > 0 ;
+      return tasks.length > 0;
     },
   },
   methods: {
