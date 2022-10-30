@@ -1,4 +1,4 @@
-![This is header image](/src/assets/logo.png)
+![This is header image](/readme/vue.png)
 
 # ToDo app
 
