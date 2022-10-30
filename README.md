@@ -1,4 +1,4 @@
-![This is header image](/readme/vue.png)
+<img src="readme/vue.png" width="25" style="top: 8px" />
 
 # ToDo app
 
